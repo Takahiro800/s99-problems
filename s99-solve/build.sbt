@@ -5,8 +5,8 @@ lazy val root = project
   .settings(
     name := "s99-solve",
     version := "0.1.0-SNAPSHOT",
-
     scalaVersion := scala3Version,
 
-    libraryDependencies += "org.scalameta" %% "munit" % "1.0.0" % Test
+    // libraryDependencies += "org.scalameta" %% "munit" % "1.0.0" % Test
+    libraryDependencies += "org.scalatest" %% "scalatest" % "3.2.18" % Test
   )
