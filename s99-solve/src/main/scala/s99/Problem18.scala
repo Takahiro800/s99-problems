@@ -16,4 +16,8 @@ object Problem18 {
       else res
     }
   }
+
+  def sliceByRecursive[A](s: Int, e: Int, ls: List[A]): List[A] = {
+    ls.drop(s).take(e - (s max 0))
+  }
 }
