@@ -29,4 +29,8 @@ object S99Int {
   def gcd(m: Int, n: Int): Int = {
     if (n == 0) m else gcd(n, m % n)
   }
+
+  implicit class RichInt(val a: Int) extends AnyVal {
+    def isCoprimeTo(b: Int): Boolean = gcd(a, b) == 1
+  }
 }

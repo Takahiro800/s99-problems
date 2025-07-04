@@ -36,4 +36,27 @@ class S99IntSpec extends AnyFunSpec {
       assert(S99Int.gcd(123456, 789012) == 12)
     }
   }
+
+  describe("isCoprimeTo") {
+    import s99.S99Int.RichInt
+
+    it("should return true for coprime numbers") {
+      assert(7.isCoprimeTo(9)) // gcd(7, 9) == 1
+      assert(13.isCoprimeTo(4)) // gcd(13, 4) == 1
+      assert(8.isCoprimeTo(15)) // gcd(8, 15) == 1
+    }
+
+    it("should return false for non-coprime numbers") {
+      assert(!6.isCoprimeTo(9)) // gcd(6, 9) == 3
+      assert(!12.isCoprimeTo(15)) // gcd(12, 15) == 3
+      assert(!18.isCoprimeTo(24)) // gcd(18, 24) == 6
+    }
+
+    it("should handle edge cases with zero and one") {
+      assert(1.isCoprimeTo(0)) // gcd(1, 0) == 1
+      assert(!0.isCoprimeTo(0)) // gcd(0, 0) is undefined, should return false
+      assert(7.isCoprimeTo(1)) // gcd(7, 1) == 1
+    }
+
+  }
 }
