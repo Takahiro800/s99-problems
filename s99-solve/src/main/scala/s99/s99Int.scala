@@ -25,4 +25,8 @@ object S99Int {
 
     isPrime.zipWithIndex.collect { case (true, idx) => idx }.toList
   }
+
+  def gcd(m: Int, n: Int): Int = {
+    if (n == 0) m else gcd(n, m % n)
+  }
 }
