@@ -59,4 +59,21 @@ class S99IntSpec extends AnyFunSpec {
     }
 
   }
+
+  describe("totient") {
+    import s99.S99Int.RichInt
+
+    it("should return the correct totient value for known cases") {
+      assert(1.totient == 1)
+      assert(2.totient == 1)
+      assert(3.totient == 2)
+      assert(4.totient == 2)
+      assert(5.totient == 4)
+    }
+
+    it("should handle larger numbers correctly") {
+      assert(10.totient == 4)
+      assert(12.totient == 4)
+    }
+  }
 }

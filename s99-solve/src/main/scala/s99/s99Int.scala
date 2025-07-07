@@ -32,5 +32,7 @@ object S99Int {
 
   implicit class RichInt(val a: Int) extends AnyVal {
     def isCoprimeTo(b: Int): Boolean = gcd(a, b) == 1
+
+    def totient: Int = (1 to a).filter(a.isCoprimeTo(_)).length
   }
 }
