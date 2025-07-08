@@ -3,22 +3,22 @@ package s99
 import org.scalatest.funspec.AnyFunSpec
 
 class S99IntSpec extends AnyFunSpec {
+  import s99.S99Int.RichInt
 
   describe("isPrime") {
 
     it("should return true for known prime numbers") {
       val primes = List(2, 3, 5, 7, 11, 13, 17, 19, 23)
-      primes.foreach(p => assert(new S99Int(p).isPrime))
+      primes.foreach(p => assert(p.isPrime))
     }
 
     it("should return false for known non-primes") {
       val nonPrimes = List(1, 4, 6, 8, 9, 10, 12, 15, 20)
-      nonPrimes.foreach(n => assert(!new S99Int(n).isPrime))
+      nonPrimes.foreach(n => assert(!n.isPrime))
     }
   }
 
   describe("gcd") {
-
     it("should return the greatest common divisor of two numbers") {
       assert(S99Int.gcd(36, 63) == 9)
       assert(S99Int.gcd(63, 36) == 9)
@@ -38,8 +38,6 @@ class S99IntSpec extends AnyFunSpec {
   }
 
   describe("isCoprimeTo") {
-    import s99.S99Int.RichInt
-
     it("should return true for coprime numbers") {
       assert(7.isCoprimeTo(9)) // gcd(7, 9) == 1
       assert(13.isCoprimeTo(4)) // gcd(13, 4) == 1
@@ -61,8 +59,6 @@ class S99IntSpec extends AnyFunSpec {
   }
 
   describe("totient") {
-    import s99.S99Int.RichInt
-
     it("should return the correct totient value for known cases") {
       assert(1.totient == 1)
       assert(2.totient == 1)
@@ -74,6 +70,24 @@ class S99IntSpec extends AnyFunSpec {
     it("should handle larger numbers correctly") {
       assert(10.totient == 4)
       assert(12.totient == 4)
+    }
+  }
+
+  describe("primeFactors") {
+    it("should return the prime factors for small numbers") {
+      assert(12.primeFactors == List(2, 2, 3))
+      assert(15.primeFactors == List(3, 5))
+      assert(28.primeFactors == List(2, 2, 7))
+    }
+
+    it("should return the prime factor for a prime number") {
+      assert(13.primeFactors == List(13))
+      assert(19.primeFactors == List(19))
+    }
+
+    it("should handle large numbers correctly") {
+      assert(315.primeFactors == List(3, 3, 5, 7))
+      assert(462.primeFactors == List(2, 3, 7, 11))
     }
   }
 }

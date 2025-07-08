@@ -1,14 +1,5 @@
 package s99
 
-class S99Int(val start: Int) {
-  import S99Int._
-
-  def isPrime: Boolean = {
-    if (start < 2) return false
-    else primeUpTo(start).contains(start)
-  }
-}
-
 object S99Int {
   def primeUpTo(n: Int): List[Int] = {
     if (n < 2) return Nil
@@ -31,8 +22,25 @@ object S99Int {
   }
 
   implicit class RichInt(val a: Int) extends AnyVal {
+    def isPrime: Boolean = {
+      if (a < 2) return false
+      else primeUpTo(a).contains(a)
+    }
+
     def isCoprimeTo(b: Int): Boolean = gcd(a, b) == 1
 
     def totient: Int = (1 to a).filter(a.isCoprimeTo(_)).length
+
+    // Problem34
+    def primeFactors: List[Int] = {
+      def loop(n: Int, ps: Stream[Int]): List[Int] = {
+        if (n.isPrime) List(n)
+        else if (n % ps.head == 0) ps.head :: loop(n / ps.head, ps)
+        else loop(n, ps.tail) // ストリームを進める
+      }
+
+      loop(a, primes)
+    }
   }
+  lazy val primes: Stream[Int] = 2 #:: Stream.from(3, 2).filter(_.isPrime)
 }
