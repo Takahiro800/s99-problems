@@ -29,12 +29,22 @@ object S99Int {
 
     def isCoprimeTo(b: Int): Boolean = gcd(a, b) == 1
 
-    def totient: Int = (1 to a).filter(a.isCoprimeTo(_)).length
+    def totient: Int = {
+      // Problem34
+      // (1 to a).filter(a.isCoprimeTo(_)).length
+
+      // Problem37
+      primeFactorMultiplicityMap.foldLeft(1) {
+        case (acc, (factor, multiplicity)) =>
+          acc * (factor - 1) * Math.pow(factor, multiplicity - 1).toInt
+      }
+    }
 
     // Problem34
     def primeFactors: List[Int] = {
       def loop(n: Int, ps: Stream[Int]): List[Int] = {
-        if (n.isPrime) List(n)
+        if (n == 1) Nil
+        else if (n.isPrime) List(n)
         else if (n % ps.head == 0) ps.head :: loop(n / ps.head, ps)
         else loop(n, ps.tail) // ストリームを進める
       }
