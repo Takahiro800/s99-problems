@@ -41,6 +41,15 @@ object S99Int {
 
       loop(a, primes)
     }
+
+    def primeFactorMultiplicity: List[(Int, Int)] = {
+      Problem13.encodeDirect(primeFactors).map(_.swap)
+    }
+
+    def primeFactorMultiplicityMap: Map[Int, Int] = {
+      primeFactorMultiplicity.toMap
+    }
   }
+
   lazy val primes: Stream[Int] = 2 #:: Stream.from(3, 2).filter(_.isPrime)
 }

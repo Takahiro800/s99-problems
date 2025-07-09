@@ -90,4 +90,52 @@ class S99IntSpec extends AnyFunSpec {
       assert(462.primeFactors == List(2, 3, 7, 11))
     }
   }
+
+  describe("primeFactorMultiplicity") {
+    it(
+      "should return the correct prime factor multiplicity for small numbers"
+    ) {
+      assert(12.primeFactorMultiplicity == List((2, 2), (3, 1)))
+      assert(15.primeFactorMultiplicity == List((3, 1), (5, 1)))
+      assert(28.primeFactorMultiplicity == List((2, 2), (7, 1)))
+    }
+
+    it(
+      "should return the correct prime factor multiplicity for prime numbers"
+    ) {
+      assert(13.primeFactorMultiplicity == List((13, 1)))
+      assert(19.primeFactorMultiplicity == List((19, 1)))
+    }
+
+    it("should handle large numbers correctly") {
+      assert(315.primeFactorMultiplicity == List((3, 2), (5, 1), (7, 1)))
+      assert(
+        462.primeFactorMultiplicity == List((2, 1), (3, 1), (7, 1), (11, 1))
+      )
+    }
+  }
+
+  describe("primeFactorMultiplicityMap") {
+    it(
+      "should return the correct prime factor multiplicity as a map for small numbers"
+    ) {
+      assert(12.primeFactorMultiplicityMap == Map(2 -> 2, 3 -> 1))
+      assert(15.primeFactorMultiplicityMap == Map(3 -> 1, 5 -> 1))
+      assert(28.primeFactorMultiplicityMap == Map(2 -> 2, 7 -> 1))
+    }
+
+    it(
+      "should return the correct prime factor multiplicity as a map for prime numbers"
+    ) {
+      assert(13.primeFactorMultiplicityMap == Map(13 -> 1))
+      assert(19.primeFactorMultiplicityMap == Map(19 -> 1))
+    }
+
+    it("should handle large numbers correctly") {
+      assert(315.primeFactorMultiplicityMap == Map(3 -> 2, 5 -> 1, 7 -> 1))
+      assert(
+        462.primeFactorMultiplicityMap == Map(2 -> 1, 3 -> 1, 7 -> 1, 11 -> 1)
+      )
+    }
+  }
 }
