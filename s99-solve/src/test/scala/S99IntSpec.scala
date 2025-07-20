@@ -164,4 +164,38 @@ class S99IntSpec extends AnyFunSpec {
       assert(S99Int.listPrimesInRange(10 to 5) == List())
     }
   }
+
+  describe("goldbach") {
+    it("should return two primes that sum to 4") {
+      assert(4.goldbach == (2, 2))
+    }
+
+    it("should return two primes that sum to 28") {
+      val (p1, p2) = 28.goldbach
+      assert(p1 + p2 == 28)
+      assert(p1.isPrime && p2.isPrime)
+    }
+
+    it("should return two primes that sum to 100") {
+      val (p1, p2) = 100.goldbach
+      assert(p1 + p2 == 100)
+      assert(p1.isPrime && p2.isPrime)
+    }
+
+    it("should throw IllegalArgumentException for odd numbers") {
+      assertThrows[IllegalArgumentException] {
+        27.goldbach
+      }
+    }
+
+    it("should throw IllegalArgumentException for numbers <= 2") {
+      assertThrows[IllegalArgumentException] {
+        2.goldbach
+      }
+
+      assertThrows[IllegalArgumentException] {
+        1.goldbach
+      }
+    }
+  }
 }

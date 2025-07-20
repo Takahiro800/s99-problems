@@ -65,6 +65,19 @@ object S99Int {
     def primeFactorMultiplicityMap: Map[Int, Int] = {
       primeFactorMultiplicity.toMap
     }
+
+    // Problem40
+    def goldbach: (Int, Int) = {
+      require(
+        a > 2 && a % 2 == 0,
+        "Argument must be an even integer greater than 2"
+      )
+
+      primes.takeWhile { _ < a }.find { p => (a - p).isPrime } match {
+        case None     => throw new IllegalArgumentException
+        case Some(p1) => (p1, a - p1)
+      }
+    }
   }
 
   lazy val primes: Stream[Int] = 2 #:: Stream.from(3, 2).filter(_.isPrime)
