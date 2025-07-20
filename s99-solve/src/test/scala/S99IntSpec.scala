@@ -138,4 +138,30 @@ class S99IntSpec extends AnyFunSpec {
       )
     }
   }
+
+  describe("listPrimesInRange") {
+    it("should return primes within the range 7 to 31") {
+      assert(
+        S99Int.listPrimesInRange(7 to 31) == List(7, 11, 13, 17, 19, 23, 29, 31)
+      )
+    }
+
+    it("should return primes within the range 1 to 10") {
+      assert(S99Int.listPrimesInRange(1 to 10) == List(2, 3, 5, 7))
+    }
+
+    it("should return an empty list when there are no primes") {
+      assert(S99Int.listPrimesInRange(0 to 1) == List())
+      assert(S99Int.listPrimesInRange(14 to 16) == List())
+    }
+
+    it("should include boundaries if they are prime") {
+      assert(S99Int.listPrimesInRange(2 to 2) == List(2))
+      assert(S99Int.listPrimesInRange(17 to 17) == List(17))
+    }
+
+    it("should return empty list for invalid range (start > end)") {
+      assert(S99Int.listPrimesInRange(10 to 5) == List())
+    }
+  }
 }

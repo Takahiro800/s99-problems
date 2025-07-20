@@ -21,6 +21,11 @@ object S99Int {
     if (n == 0) m else gcd(n, m % n)
   }
 
+  // Problem39
+  def listPrimesInRange(r: Range): List[Int] = {
+    S99Int.primes.dropWhile(_ < r.start).takeWhile(_ <= r.end).toList
+  }
+
   implicit class RichInt(val a: Int) extends AnyVal {
     def isPrime: Boolean = {
       if (a < 2) return false
