@@ -29,11 +29,12 @@ object S99Int {
 
     def isCoprimeTo(b: Int): Boolean = gcd(a, b) == 1
 
-    def totient: Int = {
-      // Problem34
-      // (1 to a).filter(a.isCoprimeTo(_)).length
+    def totientByP34: Int = {
+      (1 to a).filter(a.isCoprimeTo(_)).length
+    }
 
-      // Problem37
+    // Problem37
+    def totient: Int = {
       primeFactorMultiplicityMap.foldLeft(1) {
         case (acc, (factor, multiplicity)) =>
           acc * (factor - 1) * Math.pow(factor, multiplicity - 1).toInt
