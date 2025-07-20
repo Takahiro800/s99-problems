@@ -26,6 +26,18 @@ object S99Int {
     S99Int.primes.dropWhile(_ < r.start).takeWhile(_ <= r.end).toList
   }
 
+  // Problem41
+  def goldbachList(r: Range): List[(Int, Int)] = {
+    goldbachListLimited(r, 0)
+  }
+
+  def goldbachListLimited(r: Range, limit: Int): List[(Int, Int)] = {
+    r.filter(n => n > 2 && n % 2 == 0)
+      .map(_.goldbach)
+      .filter((p, _) => p >= limit)
+      .toList
+  }
+
   implicit class RichInt(val a: Int) extends AnyVal {
     def isPrime: Boolean = {
       if (a < 2) return false

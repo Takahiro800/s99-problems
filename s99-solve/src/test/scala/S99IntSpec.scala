@@ -198,4 +198,46 @@ class S99IntSpec extends AnyFunSpec {
       }
     }
   }
+
+  describe("goldbachList") {
+
+    it("returns correct Goldbach pairs for range 9 to 20") {
+      val result = S99Int.goldbachList(9 to 20)
+      val expected = List(
+        (3, 7), // 10
+        (5, 7), // 12
+        (3, 11), // 14
+        (3, 13), // 16
+        (5, 13), // 18
+        (3, 17) // 20
+      )
+      assert(result == expected)
+    }
+
+    it("returns an empty list when no even numbers > 2 in range") {
+      val result = S99Int.goldbachList(1 to 2)
+      assert(result.isEmpty)
+    }
+  }
+
+  describe("goldbachListLimited") {
+
+    it("filters out pairs where the first prime is less than the limit") {
+      val result = S99Int.goldbachListLimited(1 to 20, 5)
+      assert(result.forall { case (p1, _) => p1 >= 5 })
+    }
+
+    it("returns correct filtered results for range 1 to 2000 with limit 50") {
+      val result = S99Int.goldbachListLimited(1 to 2000, 50)
+
+      val expected = List(
+        (73, 919), // 992
+        (61, 1321), // 1382
+        (67, 1789), // 1856
+        (61, 1867) // 1928
+      )
+
+      assert(result.containsSlice(expected))
+    }
+  }
 }
