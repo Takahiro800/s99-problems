@@ -1,21 +1,16 @@
 package s99
 
-object S99Logic {
-  def not(a: Boolean): Boolean = {
-    a match {
-      case true  => false
-      case false => true
-    }
-  }
+class S99Logic(a: Boolean) {
+  import S99Logic._
 
-  def and(a: Boolean, b: Boolean): Boolean = {
+  def and(b: Boolean): Boolean = {
     (a, b) match {
       case (true, true) => true
       case _            => false
     }
   }
 
-  def or(a: Boolean, b: Boolean): Boolean = {
+  def or(b: Boolean): Boolean = {
     (a, b) match {
       case (true, _) => true
       case (_, true) => true
@@ -23,12 +18,23 @@ object S99Logic {
     }
   }
 
-  def equ(a: Boolean, b: Boolean): Boolean = or(and(a, b), and(not(a), not(b)))
-  def xor(a: Boolean, b: Boolean): Boolean = not(equ(a, b))
-  def nor(a: Boolean, b: Boolean): Boolean = not(or(a, b))
-  def nand(a: Boolean, b: Boolean): Boolean = not(and(a, b))
-  def impl(a: Boolean, b: Boolean): Boolean = or(not(a), b)
+  def equ(b: Boolean): Boolean = a.and(b).or(not(a).and(not(b)))
+  def xor(b: Boolean): Boolean = not(equ(b))
+  def nor(b: Boolean): Boolean = not(or(b))
+  def nand(b: Boolean): Boolean = not(and(b))
+  def impl(b: Boolean): Boolean = not(a).or(b)
 
+}
+
+object S99Logic {
+  implicit def boolean2S99Logic(a: Boolean): S99Logic = new S99Logic(a)
+
+  def not(a: Boolean): Boolean = {
+    a match {
+      case true  => false
+      case false => true
+    }
+  }
   def table2(f: (Boolean, Boolean) => Boolean) = {
     println("A   B    result")
     for {
