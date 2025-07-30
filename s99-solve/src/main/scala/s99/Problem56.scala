@@ -1,6 +1,7 @@
 package s99
 
 import s99.binary_trees.*
+import s99.Problem55.*
 
 object Problem56 {
   implicit class RichTree[T](val tree: Tree[T]) extends AnyVal {
